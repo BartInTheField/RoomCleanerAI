@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: b8a5f91a39484e245a6c85b18d29d93e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - doStopOn: {fileID: 11400000, guid: 66ccf96778db0ce40ba3a5249908ed84, type: 2}
+  - delayTimer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
