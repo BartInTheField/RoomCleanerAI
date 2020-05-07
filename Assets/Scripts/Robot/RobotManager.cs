@@ -9,7 +9,7 @@ public class RobotManager : MonoBehaviour
     [SerializeField] private Vector2 spawnLocation;
     [SerializeField] private VoidEvent doSpawnRobotOn;
 
-    private void Awake()
+    private void OnEnable()
     {
         doSpawnRobotOn.Register(SpawnRobot);
     }

@@ -13,15 +13,17 @@ public abstract class AI : MonoBehaviour
 
     [SerializeField] private AtomEventBase doStopOn;
     [SerializeField] private Timer delayTimer;
+    [SerializeField] private bool useTimer = true;
 
     protected RobotMovement movement;
     protected RobotObstacleDetector obstacleDetector;
     protected RobotCleanFloorDetector cleanFloorDetector;
     protected RobotDirtyFloorDetector dirtyFloorDetector;
 
-    private bool hasStopped = false;
+    protected bool canStart = true;
+    protected bool hasStopped = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         movement = GetComponent<RobotMovement>();
 
@@ -30,12 +32,20 @@ public abstract class AI : MonoBehaviour
         dirtyFloorDetector = GetComponent<RobotDirtyFloorDetector>();
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
-        delayTimer.OnTimeout += MoveRobot;
+        if(useTimer)
+            delayTimer.OnTimeout += MoveRobot;
+
         doStopOn.Register(StopMoving);
 
         MoveRobot();
+    }
+
+    protected virtual void Update()
+    {
+        if (!useTimer)
+            MoveRobot();
     }
 
     private void OnDestroy()
@@ -50,11 +60,18 @@ public abstract class AI : MonoBehaviour
 
     private void MoveRobot()
     {
-        if (hasStopped)
+        if (hasStopped || !canStart)
             return;
 
         movement.Move(MakeMoveDecision());
+        AfterMove();
     }
 
     protected abstract Move MakeMoveDecision();
+
+    protected virtual void AfterMove()
+    {
+
+    }
+
 }

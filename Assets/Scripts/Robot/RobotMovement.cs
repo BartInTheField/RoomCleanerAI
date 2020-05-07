@@ -15,6 +15,7 @@ public enum Move
 public class RobotMovement : MonoBehaviour
 {
     [SerializeField] private VoidEvent onMoved;
+    [SerializeField] private bool logMoves = true;
 
     private RobotObstacleDetector obstacleDetector;
 
@@ -25,9 +26,10 @@ public class RobotMovement : MonoBehaviour
 
     public void Move(Move move)
     {
-        DebugGUI.LogPersistent("RobotMove", $"Robot moved: {move}");
+        if(logMoves)
+            DebugGUI.LogPersistent("RobotMove", $"Robot moved: {move}");
 
-        switch(move)
+        switch (move)
         {
             case global::Move.Up:
                 Up();

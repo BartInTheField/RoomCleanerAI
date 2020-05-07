@@ -11,14 +11,22 @@ public class RobotCleaner : MonoBehaviour
 
     private void Awake()
     {
-        Clean();
-
         doCleanOn.Register(Clean);
+    }
+
+    private void Start()
+    {
+        Clean();
     }
 
     private void OnDestroy()
     {
         doCleanOn.Unregister(Clean);
+    }
+
+    public void SetRoom(Room room)
+    {
+        this.room = room;
     }
 
     public void Clean()
